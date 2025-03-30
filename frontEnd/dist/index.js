@@ -54,7 +54,9 @@ function showMenu() {
     1. Listar tareas
     2. Agregar Tarea
     3. Completar Tarea
-    4. Salir
+    4. Editar titulo de tarea
+    5.Ingrese el id de la tarea a eliminar 
+    6. Salir
     `);
 }
 function handleUserChoice(choice) {
@@ -95,6 +97,28 @@ function handleUserChoice(choice) {
                     }));
                     break;
                 case "4":
+                    rl.question("Ingrese el ID de la tarea a editar: ", (idTask) => {
+                        const id = parseInt(idTask);
+                        rl.question("Ingrese el nuevo titulo de la tarea: ", (newTitle) => __awaiter(this, void 0, void 0, function* () {
+                            const success = (0, taskService_1.editTask)(id, newTitle);
+                            if (yield success) {
+                                console.log("Titulo de la tarea editado correctamente\n");
+                            }
+                            else {
+                                console.log("No se encontro una tarea con ese ID.\n");
+                            }
+                            promptUser();
+                        }));
+                    });
+                    break;
+                case "5":
+                    rl.question("Ingrese el id de la tarea a eliminar ", (id) => {
+                        (0, taskService_1.deleteTask)(parseInt(id));
+                        console.log("Tarea eliminada correctamente\n");
+                        promptUser();
+                    });
+                    break;
+                case "6":
                     console.log("Saliendo del programa....");
                     rl.close();
                     break;

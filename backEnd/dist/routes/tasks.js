@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const validateTask_1 = require("../middleware/validateTask");
+// import {createNewTask} from "../control/controlTask"
 let tasks = [];
 let id = 1;
 const router = (0, express_1.Router)();
@@ -30,4 +31,7 @@ router.delete("/:id", (req, res) => {
     tasks = tasks.filter(t => t.id !== parseInt(req.params.id));
     res.status(204).send();
 });
+// router.post("/",validateTask, controlTask.createNewTask);
+// router.get("/",validateTask, controlTask.getTasks);
+//  router.put("/:id",logger, controlTask.completMark);
 exports.default = router;

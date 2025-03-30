@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemo --watch dist dist/index.js"
-  },
+  "dev": "ts-node-dev --respawn src/index.ts"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",

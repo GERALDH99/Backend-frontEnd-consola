@@ -12,6 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addTask = addTask;
 exports.getTasks = getTasks;
 exports.completMark = completMark;
+exports.deleteTask = deleteTask;
+exports.editTask = editTask;
 let tasks = [];
 let autoIncrementId = 1;
 // export function addTask(title: string): Task {
@@ -33,7 +35,7 @@ function addTask(title) {
             body: JSON.stringify({ title }),
         });
         if (!response.ok) {
-            throw new Error('Error al agregar película');
+            throw new Error('Error al agregar Titulo');
         }
         return yield response.json();
     });
@@ -61,7 +63,7 @@ function completMark(id, completed) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ completed }), // Enviar estado actualizado
+            body: JSON.stringify({ completed }),
         });
         if (!response.ok) {
             throw new Error('Error al actualizar la tarea');
@@ -69,3 +71,33 @@ function completMark(id, completed) {
         return yield response.json();
     });
 }
+function deleteTask(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield fetch(`http://localhost:3000/tasks/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        if (!response.ok) {
+            throw new Error('Error al eliminar la tarea');
+        }
+    });
+}
+;
+function editTask(id, title) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield fetch(`http://localhost:3000/tasks/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ title }),
+        });
+        if (!response.ok) {
+            throw new Error('Error al editar la tarea');
+        }
+        return yield response.json();
+    });
+}
+;

@@ -1,5 +1,5 @@
 import * as readline from "readline";
-import { addTask, getTasks,completMark} from "./services/taskService";
+import { addTask, getTasks,completMark, deleteTask, editTask} from "./services/taskService";
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -12,7 +12,9 @@ function showMenu() {
     1. Listar tareas
     2. Agregar Tarea
     3. Completar Tarea
-    4. Salir
+    4. Editar titulo de tarea
+    5.Ingrese el id de la tarea a eliminar 
+    6. Salir
     `)
 }
 
@@ -51,14 +53,39 @@ async function handleUserChoice(choice: string) {
                 promptUser();
             });
             break;
-        case "4":
-            console.log("Saliendo del programa....");
-            rl.close();
+            case "4":
+                rl.question("Ingrese el ID de la tarea a editar: ", (idTask) => {
+                    const id = parseInt(idTask);
+                    rl.question("Ingrese el nuevo titulo de la tarea: ", async (newTitle) => {
+                        const success = editTask(id, newTitle);
+                        if (await success) {
+                            console.log("Titulo de la tarea editado correctamente\n");
+                        } else {
+                            console.log("No se encontro una tarea con ese ID.\n");
+                        }
+                        promptUser();
+                    });
+                });
+           
+            break;
+        case "5":
+            rl.question("Ingrese el id de la tarea a eliminar ", (id) => {
+                deleteTask(parseInt(id));
+                console.log("Tarea eliminada correctamente\n");
+                promptUser();
+            });
             break;
 
-        default:
-            console.log("Opcion invalidad, por favor intente de nuevo.\n");
-            break;
+        
+
+                  case "6":
+                console.log("Saliendo del programa....");
+                rl.close();
+                break;
+    
+            default:
+                console.log("Opcion invalidad, por favor intente de nuevo.\n");
+                break;
 
     }
 }catch (error) {

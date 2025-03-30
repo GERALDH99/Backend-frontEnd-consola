@@ -1,3 +1,4 @@
+import { title } from "process";
 import { Task } from "../model/tasks";
 
 let tasks: Task[] = [];
@@ -61,3 +62,34 @@ export async function completMark(id: number, completed: boolean): Promise<Task>
 
     return await response.json();
 }
+
+export async function deleteTask(id: number): Promise<Task | void> {
+    const response = await fetch(`http://localhost:3000/tasks/${id}`, { 
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error('Error al eliminar la tarea');
+    }
+
+  
+};
+
+export async function editTask(id: number, title: string): Promise<Task> {
+    const response = await fetch(`http://localhost:3000/tasks/${id}`, { 
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title }),
+    });
+
+    if (!response.ok) {
+        throw new Error('Error al editar la tarea');
+    }
+
+    return await response.json();
+};
