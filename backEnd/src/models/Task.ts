@@ -1,3 +1,5 @@
+import { connect } from "http2";
+
 export interface Task {
     id: number;
     title: string;
@@ -20,6 +22,7 @@ export function addTask(title: string): string {
 
 
 export  async function getTasks(): Promise<Task[]> {
+   
     const response = await fetch("http://localhost:3000/tasks");
     const tasks =  await response.json();
     return tasks as Task[];
