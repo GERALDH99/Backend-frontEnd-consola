@@ -85,6 +85,7 @@ async function handleUserChoice(choice: string) {
     
             default:
                 console.log("Opcion invalidad, por favor intente de nuevo.\n");
+                promptUser();
                 break;
 
     }

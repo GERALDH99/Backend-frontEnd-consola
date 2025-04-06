@@ -15,8 +15,6 @@ function addTask(title) {
     return JSON.stringify(newTask);
 }
 async function getTasks() {
-    // Simulate a delay for fetching tasks
-    await new Promise((resolve) => setTimeout(resolve, 1000));
     const response = await fetch("http://localhost:3000/tasks");
     const tasks = await response.json();
     return tasks;

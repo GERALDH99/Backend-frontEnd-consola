@@ -133,6 +133,8 @@
     "@types/express": "^5.0.1",
     "@types/node": "^22.13.13",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1"
   }
 }

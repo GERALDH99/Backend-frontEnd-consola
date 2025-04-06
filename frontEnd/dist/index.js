@@ -124,6 +124,7 @@ function handleUserChoice(choice) {
                     break;
                 default:
                     console.log("Opcion invalidad, por favor intente de nuevo.\n");
+                    promptUser();
                     break;
             }
         }
